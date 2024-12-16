@@ -19,8 +19,12 @@ public class Menu {
             displayMenuOptions();
 
             try {
-                int choice = InputUtils.requestPositiveInteger("Enter your choice: ");
-                exit = processMenuChoice(choice);
+                int option = InputUtils.requestPositiveInteger("Select an option: ");
+                if (option < 1 || option > 6) {
+                    System.out.println("Invalid option. Please select a number between 1 and 6.");
+                    continue;
+                }
+                exit = processMenuOption(option);
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
             }
@@ -38,8 +42,8 @@ public class Menu {
         System.out.println("6. Exit");
     }
 
-    private boolean processMenuChoice(int choice) throws Exception {
-        switch (choice) {
+    private boolean processMenuOption(int option) throws Exception {
+        switch (option) {
             case 1:
                 createRoom();
                 break;
@@ -58,6 +62,8 @@ public class Menu {
             case 6:
                 System.out.println("Exiting the application.");
                 return true;
+            default:
+                System.out.println("Invalid option. Please select a number between 1 and 6.");
         }
         return false;
     }
